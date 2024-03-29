@@ -3,33 +3,26 @@ import multiprocessing as mp
 from datetime import date, timedelta
 import time
 
-def attend_CSU(name, year):
-    print("{} attended CSU in {}".format(name, year))
-
-def fall_in_love(person1, person2):
-    print("{} fell in love with {}".format(person1, person2))
-
-def get_married(person1, person2):
-    print("{} married {}".format(person1, person2))
+def marry(person1, person2, year):
+    print("{} married {} in {}".format(person1, person2, year))
 
 def spawn_child(parents):
     gestation = timedelta( days = (9 * 30)).total_seconds()
     time.sleep(gestation)
 
 if __name__ == "__main__":
-    nick = 'Nick'
-    melissa = 'Melissa'
 
-    attend_CSU(nick, 2014)
-    attend_CSU(melissa, 2014)
-    fall_in_love(nick, melissa)
-
-    NickAndMelissa = Process(target=get_married, args=(nick, melissa))
+    NickAndMelissa = Process(target=marry, args=(nick, melissa, 2016))
     NickAndMelissa.start()
     NickAndMelissa.join()
 
     ctx = mp.get_context('spawn')
-    child = ctx.Process(target=spawn_child, args=(NickAndMelissa,))
-    child.start()
-    child.join()
-    print('WELCOME {}'.format(child.name))
+    first_child = ctx.Process(target=spawn_child, args=(NickAndMelissa,))
+    first_child.start()
+    first_child.join() 
+    print('WELCOME {}'.format(first_child.name)) #  Output: Mark Whitehill - 2019
+
+    second_child = ctx.Process(target=spawn_child, args=(NickAndMelissa,))
+    second_child.start()
+    second_child.join()
+    print('WELCOME {}'.format(second_child.name)) # Output: Hazel Witehill - 2022
