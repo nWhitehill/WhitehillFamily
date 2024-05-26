@@ -25,4 +25,9 @@ if __name__ == "__main__":
     second_child = ctx.Process(target=spawn_child, args=(NickAndMelissa,))
     second_child.start()
     second_child.join()
-    print('WELCOME {}'.format(second_child.name)) # Output: Hazel Witehill - 2022
+    print('WELCOME {}'.format(second_child.name)) # Output: Hazel Whitehill - 2022
+
+    third_child = ctx.Process(target=spawn_child, args=(NickAndMelissa,))
+    third_child.start()
+    third_child.join() 
+    print('WELCOME {}'.format(third_child.name)) # Output: James Whitehill - 2024
