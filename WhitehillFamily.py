@@ -31,3 +31,9 @@ if __name__ == "__main__":
     third_child.start()
     third_child.join() 
     print('WELCOME {}'.format(third_child.name)) # Output: James Whitehill - 2024
+
+    forth_child = ctx.Process(target=spawn_child, args=(NickAndMelissa,))
+    forth_child.start()
+    forth_child.join() # Expected to join on May 1 2026 
+    print('WELCOME {}'.format(forth_child.name))   
+
